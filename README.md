@@ -6,6 +6,19 @@ This is a small demo application intended to have an example for an offline
 application capable of syncing with a remote couchdb database, even handling
 connection failures without slowing down the application use.
 
+## Use cases for this approach
+
+### When to use
+
+* The amount of data per user is reasonable small
+* The application must work crisp in offline situations
+
+### When not to use
+
+* The amount of backend data that must be available/possible
+  to access per user is large
+* The accessibility/authorization for specific data is a complex/highly manageable system
+
 ## Dependency hacks
 
 Since the ecosystem hardly ever is completely perfect. Some changes to dependencies
