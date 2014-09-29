@@ -4,19 +4,29 @@ EditFileAttributeComponent = Ember.Component.extend
   editMode: false
   makeEditable: -> @set 'editMode', true
   notEditable: -> @set 'editMode', false
+  db: (-> @container.lookup('adapter:application').db).property()
   doFileStuff: (file, file_type)->
-    db = @container.lookup('adapter:application').db
-    db.putAttachment @get('model.database_id'), @attribute, @get('model.rev'), btoa(file), file_type, (err, res)=>
+    @get('db').putAttachment @get('model.database_id'), @attribute, @get('model.rev'), btoa(file), file_type, (err, res)=>
       @set 'file_base64_src', null
       @model.reload()
       # @model.set 'rev', res.rev if res
       # h = {}
       # h[@attribute] = {content_type: file_type}
       # @model.set 'attachments', Ember.Object.create(h)
+      @set 'editMode', false if res
   # focusOut: -> @set 'editMode', false
   filePresent: (->
     @get("model.attachments.#{@attribute}")
   ).property('model.attachments')
+
+  actions:
+    removeAttachment: ->
+      return unless @get("filePresent")
+      @get('db').removeAttachment @get('model.database_id'), @attribute, @get('model.rev'), (err, res)=>
+        @get('model').reload() if res
+      @set 'editMode', false
+
+
 
   attachment_size: null
   file_human_size: Ember.computed 'attachment_size', ->
@@ -39,8 +49,7 @@ EditFileAttributeComponent = Ember.Component.extend
         if src = @get('file_base64_src')
           new Ember.Handlebars.SafeString("<img src=\"#{src}\" alt=\"\">")
         else
-          db = @container.lookup('adapter:application').db
-          db.getAttachment @get('model.database_id'), @attribute, (err, res)=>
+          @get('db').getAttachment @get('model.database_id'), @attribute, (err, res)=>
             if err
               # nothing yet
             else

@@ -1,11 +1,12 @@
 =yield
 if editMode
   .row.edit-mode
-    .large-2.columns
-      span.leave-edit-mode{action "notEditable"}
-    .large-2.columns= file_image_tag
-    .large-8.columns
-      view "file-upload" action="doFileStuff"
+    .large-1.medium-1.small-2.columns:  span.leave-edit-mode{action "notEditable"}
+    .large-3.medium-3.small-10.columns= file_image_tag
+    .large-1.medium-1.small-2.columns
+      if filePresent
+        span.file-remove-button{action "removeAttachment"}
+    .large-7.medium-7.small-10.columns:  view "file-upload" action="doFileStuff"
 else
   p.enter-edit-mode{action "makeEditable"}
     = file_image_tag
