@@ -1,0 +1,27 @@
+.row: .large-12.columns: h2 Expenses
+each expense in controller
+  .row: .large-12.columns
+    .expense-row
+      .large-8.columns
+        .row
+          .large-5.columns id
+          .large-7.columns{action "debugger" expense}= expense.id
+        .row
+          .large-5.columns Naam
+          .large-7.columns= edit-attribute model=expense attribute="name" selectNext="attribute" persist=true
+        .row
+          .large-5.columns Omschrijving
+          .large-7.columns= edit-attribute model=expense attribute="description" selectNext="attribute" persist=false
+        .row
+          .large-5.columns File
+          .large-7.columns= edit-file-attribute model=expense attribute="file"
+      .large-4.columns
+        if expense.isDirty
+          button.expense-undo-changes.tiny.warning.button{action "undoExpenseChanges" expense}: span
+          button.expense-save.tiny.success.button{action "saveExpense" expense}: span
+        button.expense-delete.tiny.alert.button{action "removeExpense" expense}: span
+
+.row: .large-12.colulmns
+  =input valueBinding="new_expense_name" action="addNewExpense"
+  button.new-expense-clear{action "clearNewExpense"} Clear
+  button{action "addNewExpense"} Add

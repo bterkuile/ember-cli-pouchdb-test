@@ -1,0 +1,12 @@
+=yield
+if editMode
+  .row.edit-mode
+    .large-2.columns
+      span.leave-edit-mode{action "notEditable"}
+    .large-2.columns= file_image_tag
+    .large-8.columns
+      view "file-upload" action="doFileStuff"
+else
+  p.enter-edit-mode{action "makeEditable"}
+    = file_image_tag
+    = file_human_size

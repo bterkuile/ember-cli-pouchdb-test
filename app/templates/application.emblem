@@ -1,0 +1,13 @@
+.fixed: nav.top-bar.fixed data-topbar="" role="navigation"
+  ul.title-area
+    li.name
+      h1
+        a href="#" = application_name
+    li.toggle-topbar.menu-icon
+      a href="#"
+        span Menu
+  section.top-bar-section
+    ul.left
+      link-to 'expenses' tagName="li" href=false: a href=view.href Expenses
+
+.application-content== outlet

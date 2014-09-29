@@ -1,0 +1,10 @@
+if editMode
+  form{action "save" on="submit"}
+    if showEdit
+      = input valueBinding=value placeholder=attribute
+    = yield
+else
+  if value
+    span.make-editable{action "makeEditable"}= value
+  else
+    span.make-editable.empty{action "makeEditable"}= empty_attribute

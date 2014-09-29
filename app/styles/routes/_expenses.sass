@@ -1,0 +1,21 @@
+.expense-row
+  @include grid-row()
+  border-bottom: 1px solid #888
+  margin-bottom: 1em
+.expense-undo-changes
+  margin-right: 5px
+  span
+    @extend .fa
+    @extend .fa-undo
+.expense-save
+  margin-right: 5px
+  span
+    @extend .fa
+    @extend .fa-save
+.expense-delete
+  span
+    @extend .fa
+    @extend .fa-trash
+.new-expense-clear
+  @include button($bg: $warning-color)
+  margin-right: 10px
