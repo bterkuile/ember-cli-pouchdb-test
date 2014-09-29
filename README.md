@@ -24,6 +24,11 @@ Add <tt>obj.attachments = Ember.Object.create(pouchDoc._attachments);</tt> to tr
     return obj;
   }
 ```
+### pouchdb
+
+This dependency just works. There is however already a preliminary implementation for attachment
+size support, awaiting https://github.com/pouchdb/pouchdb/issues/2708 to be implemented.
+
 
 ## Prerequisites
 
