@@ -18,6 +18,8 @@ connection failures without slowing down the application use.
 * The amount of backend data that must be available/possible
   to access per user is large
 * The accessibility/authorization for specific data is a complex/highly manageable system
+* When attachments explicitly need to be added to new records in stead
+  of already locally persited ones. (rare usecase, but okay it there)
 
 ## Dependency hacks
 
@@ -25,6 +27,8 @@ Since the ecosystem hardly ever is completely perfect. Some changes to dependenc
 might be required.
 
 ### relational-pouch
+At the moment relational pouch does not support attachments. To add this
+support edit: 
 <tt>bower_components/relational-pouch/dist/pouchdb.relational-pouch.js</tt>
 Add <tt>obj.attachments = Ember.Object.create(pouchDoc._attachments);</tt> to transformOutput.
 
