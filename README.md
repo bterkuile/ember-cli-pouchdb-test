@@ -9,7 +9,7 @@ connection failures without slowing down the application use.
 ## Use cases for this approach
 
 To get some understanding about the idea and how to use the helpers of
-this application take a look at [app/templates/expenses.emblem].
+this application take a look at [app/templates/expenses.emblem](app/templates/expenses.emblem).
 
 ### When to use
 
