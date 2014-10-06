@@ -17,8 +17,8 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
       pouchdb: {
-        local_database_name: 'atool_mobile',
-        remote_database: 'http://localhost:5984/atool_mobile',
+        local_database_name: 'ember_cli_pouchdb_test',
+        remote_database: 'http://localhost:5984/ember_cli_pouchdb_test',
         retry_timeout: 10000 // time to fail on remote database failure (tunnel etc)
       }
     }

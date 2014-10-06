@@ -31,7 +31,7 @@ might be required.
 
 ### relational-pouch
 At the moment relational pouch does not support attachments. To add this
-support edit: 
+support edit:
 <tt>bower_components/relational-pouch/dist/pouchdb.relational-pouch.js</tt>
 Add <tt>obj.attachments = Ember.Object.create(pouchDoc._attachments);</tt> to transformOutput.
 
@@ -63,6 +63,10 @@ You will need the following things properly installed on your computer.
 * change into the new directory
 * `npm install`
 * `bower install`
+* `ember g foundation-sass`
+* `find app/styles/ -name *.scss -exec rm {} \;`
+* `curl -XPUT http://localhost:5984/ember_cli_pouchdb_test`
+
 
 ## Running / Development
 

@@ -27,6 +27,7 @@
     "ember-cli": "0.0.46",
     "ember-cli-coffeescript": "^0.1.0",
     "ember-cli-font-awesome": "0.0.4",
+    "ember-cli-foundation-sass": "^0.3.2",
     "ember-cli-ic-ajax": "0.1.1",
     "ember-cli-inject-live-reload": "^1.0.2",
     "ember-cli-qunit": "0.1.0",

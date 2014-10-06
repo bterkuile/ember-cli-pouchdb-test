@@ -15,7 +15,7 @@
 /libpeerconnection.log
 npm-debug.log
 testem.log
+.DS_Store
 
 #Ignore symlinked foundation folder, added by ember-cli-foundation-sass
 /app/styles/foundation
-.DS_Store
