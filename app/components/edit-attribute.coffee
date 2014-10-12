@@ -21,7 +21,7 @@ EditAttributeComponent = Ember.Component.extend
   persist: true
   value: Ember.computed (key, value, previousValue)->
     key = "model.#{@attribute}"
-    if value and value isnt @get(key) #setter
+    if arguments.length > 1 and value isnt @get(key) #setter
       @set key, value
     @get key
   didInsertElement: ->
