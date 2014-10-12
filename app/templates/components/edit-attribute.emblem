@@ -1,7 +1,7 @@
 if editMode
   form{action "save" on="submit"}
     if showEdit
-      = input valueBinding=value placeholder=attribute
+      = input valueBinding="value" placeholder=attribute
     = yield
 else
   if value
