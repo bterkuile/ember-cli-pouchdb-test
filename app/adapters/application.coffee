@@ -15,6 +15,9 @@ if EmberENV.APP.pouchdb.remote_database
   db
     .sync EmberENV.APP.pouchdb.remote_database, live: true
     .on 'error', errorFunc
+    .on 'change', (change)->
+      if change.direction is "pull" and change.change.docs_read
+        AtoolMobile.__container__.lookup('route:application').refresh()
 # ApplicationAdapter = DS.RESTAdapter.extend()
 ApplicationAdapter = EmberPouch.Adapter.extend
   db: db
