@@ -66,6 +66,7 @@ You will need the following things properly installed on your computer.
 * `ember g foundation-sass`
 * `find app/styles/ -name *.scss -exec rm {} \;`
 * `curl -XPUT http://localhost:5984/ember_cli_pouchdb_test`
+* npm install -g add-cors-to-couchdb && add-cors-to-couchdb
 
 
 ## Running / Development
