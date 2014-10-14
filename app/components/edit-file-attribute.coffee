@@ -22,9 +22,10 @@ EditFileAttributeComponent = Ember.Component.extend
   actions:
     removeAttachment: ->
       return unless @get("filePresent")
-      @get('db').removeAttachment @get('model.database_id'), @attribute, @get('model.rev'), (err, res)=>
-        @get('model').reload() if res
-      @set 'editMode', false
+      if confirm("Are you sure you want to remove the file?")
+        @get('db').removeAttachment @get('model.database_id'), @attribute, @get('model.rev'), (err, res)=>
+          @get('model').reload() if res
+        @set 'editMode', false
 
 
 
