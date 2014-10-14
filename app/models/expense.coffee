@@ -6,7 +6,9 @@ Expense = DS.Model.extend Ember.Validations.Mixin,
   description: DS.attr('string')
   validations:
     name:
-      presence: true
-
+      length:
+        minimum: 3
+      format:
+        with: /^[\w ]*$/
 
 `export default Expense`

@@ -3,6 +3,9 @@
 ExpensesController = Ember.ArrayController.extend
   new_expense_name: ''
   actions:
+    debug: (expense)->
+      debugger
+      false
     clearNewExpense: -> @set 'new_expense_name', ''
     addNewExpense: ->
       return alert("Name must be present") unless @get('new_expense_name')

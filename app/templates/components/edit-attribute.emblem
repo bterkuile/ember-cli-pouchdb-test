@@ -2,6 +2,8 @@ if editMode
   form{action "save" on="submit"}
     if showEdit
       = input valueBinding="value" placeholder=attribute
+      if has_error
+        span.error-explanation= error_explanation
     = yield
 else
   if value

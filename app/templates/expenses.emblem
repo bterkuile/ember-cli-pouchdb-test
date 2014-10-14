@@ -5,7 +5,7 @@ each expense in controller
       .large-8.columns
         .row
           .large-5.columns id
-          .large-7.columns{action "debugger" expense}= expense.id
+          .large-7.columns{action "debug" expense}= expense.id
         .row
           .large-5.columns Naam
           .large-7.columns= edit-attribute model=expense attribute="name" selectNext="attribute" persist=true

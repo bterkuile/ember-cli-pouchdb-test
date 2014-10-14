@@ -20,6 +20,9 @@ EditAttributeComponent = Ember.Component.extend
   model_generic_class: (-> "edit-#{@model.constructor.typeKey}-attribute-container").property('model')
   persist: true
   has_error: false
+  error_explanation: Ember.computed 'has_error', ->
+    return '' unless @get("model.errors.#{@attribute}.length")
+    [@attribute, @get("model.errors.#{@attribute}").join(', ')].join(' ')
 
   value: Ember.computed (key, value, previousValue)->
     key = "model.#{@attribute}"
