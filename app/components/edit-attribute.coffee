@@ -15,10 +15,12 @@
 EditAttributeComponent = Ember.Component.extend
   editMode: false
   classNames: ['edit-attribute-container']
-  classNameBindings: ['model_specific_class', 'model_generic_class']
+  classNameBindings: ['model_specific_class', 'model_generic_class', 'has_error:error']
   model_specific_class: (-> "edit-#{@model.constructor.typeKey}-#{@model.id}-attribute-container").property('model')
   model_generic_class: (-> "edit-#{@model.constructor.typeKey}-attribute-container").property('model')
   persist: true
+  has_error: false
+
   value: Ember.computed (key, value, previousValue)->
     key = "model.#{@attribute}"
     if arguments.length > 1 and value isnt @get(key) #setter
@@ -30,6 +32,10 @@ EditAttributeComponent = Ember.Component.extend
       # if this changes outside the component's context, it is not
       # observed by the computed property. model.@attribute is not (yet) working :)
       @set('value', @get("model.#{@attribute}")) if @get('value') isnt @get("model.#{@attribute}")
+    @addObserver "model.errors.#{@attribute}.length", (attribute)=>
+      @set 'has_error', !!@get("model.errors.#{@attribute}.length")
+    @model.validate().then =>
+      @set 'has_error', !!@get("model.errors.#{@attribute}.length")
 
   showEdit: (-> !@get('template') ).property('template')
   actions:
@@ -44,6 +50,7 @@ EditAttributeComponent = Ember.Component.extend
           input.val('').val(tmpString)
       , 100
     save: ->
+      return if @has_error
       @set 'editMode', false
       if @get('showEdit')
         # expect value to be set on internal field
@@ -75,6 +82,7 @@ EditAttributeComponent = Ember.Component.extend
               input.val('').val(tmpString) # focus cursor after text, in before
           , 100
   focusOut: ->
+    return if @has_error
     if @get('showEdit')
       @set "value", @get("model.#{@attribute}")
     @set 'editMode', false
