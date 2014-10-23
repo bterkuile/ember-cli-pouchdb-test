@@ -12,9 +12,8 @@
 # Now a focus out event will keep the value but not save
 # the model.
 `import Ember from 'ember'`
-EditAttributeComponent = Ember.Component.extend
+EditDateAttributeComponent = Ember.Component.extend
   editMode: false
-  rows: 0
   classNames: ['edit-attribute-container']
   classNameBindings: ['model_specific_class', 'model_generic_class', 'has_error:error']
   model_specific_class: (-> "edit-#{@model.constructor.typeKey}-#{@model.id}-attribute-container").property('model')
@@ -28,9 +27,25 @@ EditAttributeComponent = Ember.Component.extend
 
   value: Ember.computed (key, value, previousValue)->
     key = "model.#{@attribute}"
-    if arguments.length > 1 and value isnt @get(key) #setter
-      @set key, value
-    @get key
+    if arguments.length > 1 # and value isnt @get(key) #setter
+      if value
+        if typeof value is 'string' #coming from field, if Date object model attribute is already set
+          if value.length is 10
+            date_value = new Date(value)
+            @set 'has_error', false
+            @set key, date_value
+          else
+            @set 'has_error', true
+      else
+        @set key, null # empty date
+        @set 'has_error', false
+      get_value = value
+    get_value ||= @get key
+
+    if get_value
+      get_value = get_value.toISOString() if typeof get_value is 'object'
+      get_value = get_value.substr(0,10) if typeof get_value  is 'string'
+    get_value
 
   didInsertElement: ->
     @addObserver "model.#{@attribute}", (attribute)=>
@@ -58,12 +73,6 @@ EditAttributeComponent = Ember.Component.extend
     save: ->
       return if @has_error
       @set 'editMode', false
-      if @get('showEdit')
-        # expect value to be set on internal field
-        @set "model.#{@attribute}", @get('value')
-      else
-        # expect value to be set on external field
-        @set "value", @get("model.#{@attribute}")
       @model.save() if @persist
 
       # Focus on next field if exists
@@ -88,14 +97,8 @@ EditAttributeComponent = Ember.Component.extend
               input.val('').val(tmpString) # focus cursor after text, in before
           , 100
   focusOut: ->
-    return if @has_error
-    if @get('showEdit')
-      @set "value", @get("model.#{@attribute}")
+    return false if @has_error
     @set 'editMode', false
-  empty_attribute: (-> if @emptyText is "not_set" then "<empty #{@attribute}>" else @emptyText).property('attribute')
+  empty_attribute: (-> if @emptyText is "not_set" then "<no #{@attribute}>" else @emptyText).property('attribute')
 
-  # valueChanged: (->
-  #   debugger
-  # ).observe('edit_value')
-
-`export default EditAttributeComponent`
+`export default EditDateAttributeComponent`

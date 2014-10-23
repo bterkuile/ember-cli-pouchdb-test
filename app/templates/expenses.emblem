@@ -8,10 +8,19 @@ each expense in controller
           .large-7.columns{action "debug" expense}= expense.id
         .row
           .large-5.columns Naam
-          .large-7.columns= edit-attribute model=expense attribute="name" selectNext="attribute" persist=true
+          .large-7.columns= edit-attribute model=expense attribute="name" selectNext="attribute" persist=false
+        .row
+          .large-5.columns Amount
+          .large-7.columns= edit-attribute model=expense attribute="amount" selectNext="attribute" persist=false
         .row
           .large-5.columns Omschrijving
-          .large-7.columns= edit-attribute model=expense attribute="description" selectNext="attribute" persist=false
+          .large-7.columns= edit-attribute model=expense attribute="description" selectNext="attribute" persist=false emptyText="--" rows=5
+        .row
+          .large-5.columns Invoice date
+          .large-7.columns= edit-date-attribute model=expense attribute="invoice_date" selectNext="attribute" persist=false
+        .row
+          .large-5.columns Payment date
+          .large-7.columns= edit-date-attribute model=expense attribute="payment_date" selectNext="attribute" persist=false
         .row
           .large-5.columns File
           .large-7.columns= edit-file-attribute model=expense attribute="file"

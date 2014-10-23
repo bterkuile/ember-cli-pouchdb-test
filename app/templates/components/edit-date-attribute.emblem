@@ -1,10 +1,7 @@
 if editMode
   form{action "save" on="submit"}
     if showEdit
-      if rows
-        = textarea valueBinding="value" rows=rows
-      else
-        = input valueBinding="value" placeholder=attribute
+      = input valueBinding="value" placeholder="yyyy-mm-dd"
       if has_error
         span.error-explanation= error_explanation
     = yield
